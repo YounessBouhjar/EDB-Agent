@@ -21,7 +21,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/agent")
-@CrossOrigin(origins = "http://localhost:4200")
 
 public class AgentController {
     private final AgentService agentService;
@@ -170,4 +169,14 @@ public class AgentController {
 		public ResponseEntity<CompteBean> updateSol(@PathVariable("idAgent") Long idAgent,@RequestParam(required = true) float solde){
 	    	return microserviceCompteProxy.updateSol(idAgent, solde);
 	}
+	    @GetMapping("/transfert/find/{codetransfert}")
+		public ResponseEntity<TransfertBean> getTransfertByCodeTransfert(@PathVariable("codetransfert") String codeTransfert){
+	    	return microserviceTransfertProxy.getTransfertByCodeTransfert(codeTransfert);
+	    
+	    }
+	    @PutMapping("/transfert/status/{codeTransfert}")
+		public ResponseEntity<TransfertBean> updateTransfert(@PathVariable("codeTransfert") String codeTransfert,@RequestParam(required = true) String status,@RequestParam(required = true) String motif){
+	    	return microserviceTransfertProxy.updateTransfert(codeTransfert, status, motif);
+	    }
+		
 }
